@@ -10,6 +10,8 @@
 		1AC6FB21180E996B004C840B /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */; };
 		1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB07180E9839004C840B /* libcocos2d iOS.a */; };
 		1B8A88E11FAC098D00DE3D44 /* JoyStick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B8A88DF1FAC098D00DE3D44 /* JoyStick.cpp */; };
+		1BC4D2681FB008DF00FAC33D /* player in Resources */ = {isa = PBXBuildFile; fileRef = 1BC4D2671FB008DF00FAC33D /* player */; };
+		1BC4D26B1FB008FF00FAC33D /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1BC4D2691FB008FF00FAC33D /* Player.cpp */; };
 		1BEBF2551FAC08A500ECD87B /* joystick-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEBF2531FAC08A500ECD87B /* joystick-bg.png */; };
 		1BEBF2561FAC08A500ECD87B /* joystick.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEBF2541FAC08A500ECD87B /* joystick.png */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -118,6 +120,9 @@
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		1B8A88DF1FAC098D00DE3D44 /* JoyStick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JoyStick.cpp; sourceTree = "<group>"; };
 		1B8A88E01FAC098D00DE3D44 /* JoyStick.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JoyStick.hpp; sourceTree = "<group>"; };
+		1BC4D2671FB008DF00FAC33D /* player */ = {isa = PBXFileReference; lastKnownFileType = folder; path = player; sourceTree = "<group>"; };
+		1BC4D2691FB008FF00FAC33D /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		1BC4D26A1FB008FF00FAC33D /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
 		1BEBF2531FAC08A500ECD87B /* joystick-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "joystick-bg.png"; sourceTree = "<group>"; };
 		1BEBF2541FAC08A500ECD87B /* joystick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joystick.png; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -303,6 +308,7 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1BC4D2671FB008DF00FAC33D /* player */,
 				521A8EA819F11F5000D177D7 /* fonts */,
 				3EACC98E19EE6D4300EB3C5E /* res */,
 				46880B7619C43A67006E1F66 /* CloseNormal.png */,
@@ -324,6 +330,8 @@
 				46880B8719C43A87006E1F66 /* HelloWorldScene.h */,
 				1B8A88DF1FAC098D00DE3D44 /* JoyStick.cpp */,
 				1B8A88E01FAC098D00DE3D44 /* JoyStick.hpp */,
+				1BC4D2691FB008FF00FAC33D /* Player.cpp */,
+				1BC4D26A1FB008FF00FAC33D /* Player.hpp */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -491,6 +499,7 @@
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				46880B8119C43A67006E1F66 /* HelloWorld.png in Resources */,
 				46880B7D19C43A67006E1F66 /* CloseSelected.png in Resources */,
+				1BC4D2681FB008DF00FAC33D /* player in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				1BEBF2551FAC08A500ECD87B /* joystick-bg.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
@@ -532,6 +541,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				1BC4D26B1FB008FF00FAC33D /* Player.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,

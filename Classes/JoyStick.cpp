@@ -17,11 +17,11 @@ bool JoyStick::init()
     }
     
     joystick_bg = Sprite::create("joystick-bg.png");
-    joystick_bg->setPosition(Vec2(150,150));
+    joystick_bg->setPosition(Vec2(100,120));
     addChild(joystick_bg);
     
     joystick = Sprite::create("joystick.png");
-    joystick->setPosition(Vec2(150,150));
+    joystick->setPosition(Vec2(100,120));
     addChild(joystick);
     
     return true;

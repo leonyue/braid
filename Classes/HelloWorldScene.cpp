@@ -1,8 +1,11 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 #include "JoyStick.hpp"
+#include "Player.hpp"
 
 USING_NS_CC;
+
+static const float kMoveSpeed = 30;
 
 Scene* HelloWorld::createScene()
 {
@@ -43,18 +46,69 @@ bool HelloWorld::init()
     /////////////////////////////
     // 3. add your codes below...
     
+    // add a test man
+//    auto man = Sprite::create("joystick.png");
+    auto man = Player::create();
+    man->setPosition(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2);
+    addChild(man);
+    _man = man;
+    
     // add JoyStick
     JoyStick *js = JoyStick::create();
     js->setPosition(Vec2::ZERO);
-    addChild(js);
-    
     js->setCallback(CC_CALLBACK_1(HelloWorld::joystickDirectionChangeCallBack, this));
+    addChild(js);
+    _js = js;
+    
+    // add schedule
+//    this->schedule(schedule_selector(HelloWorld::updateUserLocation), 0.1, 1, 0);
     
     return true;
 }
 
+
+void HelloWorld::updateUserLocation(float dt) {
+//    RDIRECTION dir = _js->_dir;
+//    switch (dir) {
+//        case UP:
+//            auto Mov
+//            break;
+//            
+//        default:
+//            break;
+//    }
+}
+
 void HelloWorld::joystickDirectionChangeCallBack(RDIRECTION direction) {
-    printf("direction %d \n",direction);
+    _man->stopAllActions();
+    Vec2 by;
+    switch (direction) {
+        case STAY:
+            _man->halt();
+            break;
+        case RIGHT:
+            by = Vec2(kMoveSpeed, 0);
+            _man->walkForward();
+            break;
+        case LEFT:
+            by = Vec2(-kMoveSpeed, 0);
+            _man->walkBackward();
+            break;
+        case UP:
+            by = Vec2(0, kMoveSpeed);
+            break;
+        case DOWN:
+            by = Vec2(0, -kMoveSpeed);
+            break;
+        default:
+            break;
+    }
+    if (by.x == 0 && by.y == 0) {
+        return;
+    }
+    
+    RepeatForever *moveRepeat = RepeatForever::create(MoveBy::create(1.f, by));
+    _man->runAction(moveRepeat);
 }
 
 void HelloWorld::menuCloseCallback(Ref* pSender)

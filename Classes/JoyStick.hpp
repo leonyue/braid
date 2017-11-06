@@ -42,11 +42,11 @@ public:
     
     void setCallback(const lyJoystickCallback& callback);
 
+    RDIRECTION _dir;
 private:
     cocos2d::EventListenerTouchOneByOne *listener;
     cocos2d::Sprite *joystick;
     cocos2d::Sprite *joystick_bg;
-    RDIRECTION _dir;
     void checkDirection(float angle);
     lyJoystickCallback _callback;
     

@@ -4,6 +4,8 @@
 #include "cocos2d.h"
 #include "JoyStick.hpp"
 
+class JoyStick;
+class Player;
 class HelloWorld : public cocos2d::Scene
 {
 public:
@@ -17,6 +19,10 @@ public:
     
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
+private:
+    void updateUserLocation(float);
+    Player *_man;
+    JoyStick *_js;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
