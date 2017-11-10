@@ -9,9 +9,15 @@
 /* Begin PBXBuildFile section */
 		1AC6FB21180E996B004C840B /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */; };
 		1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB07180E9839004C840B /* libcocos2d iOS.a */; };
+		1B017F771FB2A0D800FB6A9D /* LoadingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B017F751FB2A0D800FB6A9D /* LoadingScene.cpp */; };
+		1B017F791FB2E0B900FB6A9D /* res-mario in Resources */ = {isa = PBXBuildFile; fileRef = 1B017F781FB2E0B900FB6A9D /* res-mario */; };
 		1B8A88E11FAC098D00DE3D44 /* JoyStick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B8A88DF1FAC098D00DE3D44 /* JoyStick.cpp */; };
+		1B9B407D1FB1412E0074B438 /* Mario.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B407B1FB1412E0074B438 /* Mario.cpp */; };
+		1B9B40801FB19BF90074B438 /* mario in Resources */ = {isa = PBXBuildFile; fileRef = 1B9B407F1FB19BF90074B438 /* mario */; };
 		1BC4D2681FB008DF00FAC33D /* player in Resources */ = {isa = PBXBuildFile; fileRef = 1BC4D2671FB008DF00FAC33D /* player */; };
 		1BC4D26B1FB008FF00FAC33D /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1BC4D2691FB008FF00FAC33D /* Player.cpp */; };
+		1BC4D26D1FB03B3600FAC33D /* map in Resources */ = {isa = PBXBuildFile; fileRef = 1BC4D26C1FB03B3600FAC33D /* map */; };
+		1BC4D2701FB03C6D00FAC33D /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1BC4D26E1FB03C6D00FAC33D /* Map.cpp */; };
 		1BEBF2551FAC08A500ECD87B /* joystick-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEBF2531FAC08A500ECD87B /* joystick-bg.png */; };
 		1BEBF2561FAC08A500ECD87B /* joystick.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEBF2541FAC08A500ECD87B /* joystick.png */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -118,11 +124,20 @@
 /* Begin PBXFileReference section */
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
+		1B017F751FB2A0D800FB6A9D /* LoadingScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LoadingScene.cpp; sourceTree = "<group>"; };
+		1B017F761FB2A0D800FB6A9D /* LoadingScene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LoadingScene.hpp; sourceTree = "<group>"; };
+		1B017F781FB2E0B900FB6A9D /* res-mario */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "res-mario"; sourceTree = "<group>"; };
 		1B8A88DF1FAC098D00DE3D44 /* JoyStick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JoyStick.cpp; sourceTree = "<group>"; };
 		1B8A88E01FAC098D00DE3D44 /* JoyStick.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JoyStick.hpp; sourceTree = "<group>"; };
+		1B9B407B1FB1412E0074B438 /* Mario.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Mario.cpp; sourceTree = "<group>"; };
+		1B9B407C1FB1412E0074B438 /* Mario.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Mario.hpp; sourceTree = "<group>"; };
+		1B9B407F1FB19BF90074B438 /* mario */ = {isa = PBXFileReference; lastKnownFileType = folder; path = mario; sourceTree = "<group>"; };
 		1BC4D2671FB008DF00FAC33D /* player */ = {isa = PBXFileReference; lastKnownFileType = folder; path = player; sourceTree = "<group>"; };
 		1BC4D2691FB008FF00FAC33D /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 		1BC4D26A1FB008FF00FAC33D /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
+		1BC4D26C1FB03B3600FAC33D /* map */ = {isa = PBXFileReference; lastKnownFileType = folder; path = map; sourceTree = "<group>"; };
+		1BC4D26E1FB03C6D00FAC33D /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
+		1BC4D26F1FB03C6D00FAC33D /* Map.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Map.hpp; sourceTree = "<group>"; };
 		1BEBF2531FAC08A500ECD87B /* joystick-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "joystick-bg.png"; sourceTree = "<group>"; };
 		1BEBF2541FAC08A500ECD87B /* joystick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joystick.png; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -308,6 +323,9 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1B017F781FB2E0B900FB6A9D /* res-mario */,
+				1B9B407F1FB19BF90074B438 /* mario */,
+				1BC4D26C1FB03B3600FAC33D /* map */,
 				1BC4D2671FB008DF00FAC33D /* player */,
 				521A8EA819F11F5000D177D7 /* fonts */,
 				3EACC98E19EE6D4300EB3C5E /* res */,
@@ -328,10 +346,16 @@
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 				46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */,
 				46880B8719C43A87006E1F66 /* HelloWorldScene.h */,
+				1B017F751FB2A0D800FB6A9D /* LoadingScene.cpp */,
+				1B017F761FB2A0D800FB6A9D /* LoadingScene.hpp */,
 				1B8A88DF1FAC098D00DE3D44 /* JoyStick.cpp */,
 				1B8A88E01FAC098D00DE3D44 /* JoyStick.hpp */,
 				1BC4D2691FB008FF00FAC33D /* Player.cpp */,
 				1BC4D26A1FB008FF00FAC33D /* Player.hpp */,
+				1B9B407B1FB1412E0074B438 /* Mario.cpp */,
+				1B9B407C1FB1412E0074B438 /* Mario.hpp */,
+				1BC4D26E1FB03C6D00FAC33D /* Map.cpp */,
+				1BC4D26F1FB03C6D00FAC33D /* Map.hpp */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -496,10 +520,12 @@
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
+				1B9B40801FB19BF90074B438 /* mario in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				46880B8119C43A67006E1F66 /* HelloWorld.png in Resources */,
 				46880B7D19C43A67006E1F66 /* CloseSelected.png in Resources */,
 				1BC4D2681FB008DF00FAC33D /* player in Resources */,
+				1BC4D26D1FB03B3600FAC33D /* map in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				1BEBF2551FAC08A500ECD87B /* joystick-bg.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
@@ -514,6 +540,7 @@
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
+				1B017F791FB2E0B900FB6A9D /* res-mario in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
 				46880B7B19C43A67006E1F66 /* CloseNormal.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
@@ -546,7 +573,10 @@
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
+				1BC4D2701FB03C6D00FAC33D /* Map.cpp in Sources */,
+				1B9B407D1FB1412E0074B438 /* Mario.cpp in Sources */,
 				1B8A88E11FAC098D00DE3D44 /* JoyStick.cpp in Sources */,
+				1B017F771FB2A0D800FB6A9D /* LoadingScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,10 +628,12 @@
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CODE_SIGN_FLAGS = "";
 				OTHER_LDFLAGS = (
 					"$(_COCOS_LIB_IOS_BEGIN)",
 					"$(_COCOS_LIB_IOS_END)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.leonyue.braid;
 				SDKROOT = iphoneos;
 				STRIP_PNG_TEXT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -631,10 +663,12 @@
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CODE_SIGN_FLAGS = "";
 				OTHER_LDFLAGS = (
 					"$(_COCOS_LIB_IOS_BEGIN)",
 					"$(_COCOS_LIB_IOS_END)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.leonyue.braid;
 				SDKROOT = iphoneos;
 				STRIP_PNG_TEXT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";

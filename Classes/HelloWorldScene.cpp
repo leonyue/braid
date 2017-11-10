@@ -2,14 +2,24 @@
 #include "SimpleAudioEngine.h"
 #include "JoyStick.hpp"
 #include "Player.hpp"
+#include "Mario.hpp"
+#include "Map.hpp"
 
 USING_NS_CC;
 
-static const float kMoveSpeed = 30;
+static const float kMoveSpeed = 100;
+static const float KTunnelTag = 101;
+static const float kBrownBlockTag = 102;
+static const int   kMarioTag = 0x09;
 
 Scene* HelloWorld::createScene()
 {
-    return HelloWorld::create();
+    Scene *scene = Scene::createWithPhysics();
+    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+    scene->getPhysicsWorld()->setGravity(Vec2(0,-100));
+    auto layer = HelloWorld::create();
+    scene->addChild(layer);
+    return scene;
 }
 
 // on "init" you need to initialize your instance
@@ -24,34 +34,64 @@ bool HelloWorld::init()
     
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-
-    // add a "close" icon to exit the progress.  it's an autorelease object
-    auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
-                                           CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
     
-    closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
-                                origin.y + closeItem->getContentSize().height/2));
-
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
-
-    /////////////////////////////
-    // 3. add your codes below...
     
-    // add a test man
-//    auto man = Sprite::create("joystick.png");
-    auto man = Player::create();
-    man->setPosition(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2);
-    addChild(man);
-    _man = man;
+    //add bg
+    LayerColor *colorLayer = LayerColor::create(Color4B(244, 234, 234, 244));
+    addChild(colorLayer, -4);
+    
+    //add map
+    TMXTiledMap *map = TMXTiledMap::create("map/level1.tmx");
+    map->setAnchorPoint(Vec2(0, 0));
+    map->setPosition(Vec2(origin.x, origin.y));
+    addChild(map, 10, 666);
+    _map = map;
+    
+    auto group = map->getObjectGroup("ObjectLayer1");
+    auto objects = group->getObjects();
+    for (auto obj : objects) {
+        ValueMap &dict = obj.asValueMap();
+        float x = dict["x"].asFloat();
+        float y = dict["y"].asFloat();
+        
+        float width = dict["width"].asFloat();
+        float height = dict["height"].asFloat();
+        
+        std::string type = dict["type"].asString();
+        if (type.compare("Block") == 0) {
+            CCLOG("it is a block:");
+        }
+        
+        PhysicsBody *phy = PhysicsBody::createBox(Size(width, height));
+        phy->setDynamic(false);
+        phy->getFirstShape()->setDensity(1.0);
+        phy->getFirstShape()->setFriction(1.f);
+        phy->getFirstShape()->setRestitution(0.f);
+        phy->getFirstShape()->setContactTestBitmask(0x00001);
+        Sprite *sp = Sprite::create();
+        sp->setPosition(Vec2(x,y));
+        sp->setAnchorPoint(Vec2::ZERO);
+        sp->setContentSize(Size(width, height));
+        sp->setPhysicsBody(phy);
+        _map->addChild(sp);
+    }
+    
+    
+    // add mario
+    auto mario = Mario::create();
+    mario->setPosition(origin.x + visibleSize.width / 2, origin.y + 10 );
+    mario->setPhysicsBody(PhysicsBody::createBox(mario->getContentSize()));
+    mario->setTag(kMarioTag);
+    mario->getPhysicsBody()->setRotationEnable(false);
+    mario->getPhysicsBody()->getFirstShape()->setDensity(1.f);
+    mario->getPhysicsBody()->getFirstShape()->setRestitution(0.f);
+    mario->getPhysicsBody()->getFirstShape()->setFriction(1.f);
+    mario->getPhysicsBody()->getFirstShape()->setContactTestBitmask(0x00001);
+    addChild(mario);
+    _mario = mario;
+    
+//    auto follow = Follow::create(mario);
+//    runAction(follow);
     
     // add JoyStick
     JoyStick *js = JoyStick::create();
@@ -60,55 +100,97 @@ bool HelloWorld::init()
     addChild(js);
     _js = js;
     
-    // add schedule
-//    this->schedule(schedule_selector(HelloWorld::updateUserLocation), 0.1, 1, 0);
+    this->schedule(schedule_selector(HelloWorld::updateUserLocation), 0.1, CC_REPEAT_FOREVER, 0);
+    
+    // add map
+    auto body = PhysicsBody::createEdgeBox(visibleSize,PHYSICSBODY_MATERIAL_DEFAULT, 3);
+    auto edgeShape = Node::create();
+    edgeShape->setPhysicsBody(body);
+    edgeShape->setPosition(origin.x +visibleSize.width / 2,origin.y + visibleSize.height/2);
+    addChild(edgeShape);
     
     return true;
 }
 
-
-void HelloWorld::updateUserLocation(float dt) {
-//    RDIRECTION dir = _js->_dir;
-//    switch (dir) {
-//        case UP:
-//            auto Mov
-//            break;
-//            
-//        default:
-//            break;
-//    }
+void HelloWorld::onEnter() {
+    Scene::onEnter();
+    auto contactListener = EventListenerPhysicsContact::create();
+    contactListener->onContactBegin = CC_CALLBACK_1(HelloWorld::onContactBegin, this);
+    contactListener->onContactSeparate = CC_CALLBACK_1(HelloWorld::onContactSeparate, this);
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 }
 
-void HelloWorld::joystickDirectionChangeCallBack(RDIRECTION direction) {
-    _man->stopAllActions();
-    Vec2 by;
-    switch (direction) {
+bool HelloWorld::onContactBegin(PhysicsContact &contact) {
+    auto a = contact.getShapeA()->getBody()->getNode();
+    auto b = contact.getShapeB()->getBody()->getNode();
+    Node *mario = nullptr;
+    Node *another = nullptr;
+    if (a->getTag() == kMarioTag) {
+        mario = a;
+        another = b;
+    }
+    if (b->getTag() == kMarioTag) {
+        mario = b;
+        another = b;
+    }
+    
+    if (mario != nullptr) {
+        mario->stopActionByTag(199);
+        Rect rect =  mario->getBoundingBox().unionWithRect(another->getBoundingBox());
+    }
+    
+    return true;
+}
+
+void HelloWorld::onContactSeparate(cocos2d::PhysicsContact &contact) {
+    
+}
+void HelloWorld::updateUserLocation(float dt) {
+    switch (_js->_dir) {
         case STAY:
-            _man->halt();
             break;
         case RIGHT:
-            by = Vec2(kMoveSpeed, 0);
-            _man->walkForward();
+        {
+            auto move = MoveBy::create(dt, Vec2(-kMoveSpeed * dt, 0));
+            move->setTag(199);
+            _map->runAction(move);
+        }
             break;
         case LEFT:
-            by = Vec2(-kMoveSpeed, 0);
-            _man->walkBackward();
+        {
+            auto move = MoveBy::create(dt, Vec2(kMoveSpeed * dt, 0));
+            move->setTag(199);
+            _map->runAction(move);
+        }
             break;
         case UP:
-            by = Vec2(0, kMoveSpeed);
             break;
         case DOWN:
-            by = Vec2(0, -kMoveSpeed);
             break;
         default:
             break;
     }
-    if (by.x == 0 && by.y == 0) {
-        return;
+}
+
+void HelloWorld::joystickDirectionChangeCallBack(RDIRECTION direction) {
+    switch (direction) {
+        case STAY:
+            _mario->halt();
+            break;
+        case RIGHT:
+            _mario->walkForward();
+            break;
+        case LEFT:
+            _mario->walkBackward();
+            break;
+        case UP:
+//            _mario->getPhysicsBody()->applyImpulse(Vec2(0,20000.f));
+            break;
+        case DOWN:
+            break;
+        default:
+            break;
     }
-    
-    RepeatForever *moveRepeat = RepeatForever::create(MoveBy::create(1.f, by));
-    _man->runAction(moveRepeat);
 }
 
 void HelloWorld::menuCloseCallback(Ref* pSender)

@@ -5,13 +5,14 @@
 #include "JoyStick.hpp"
 
 class JoyStick;
-class Player;
+class Mario;
 class HelloWorld : public cocos2d::Scene
 {
 public:
     static cocos2d::Scene* createScene();
 
     virtual bool init();
+    virtual void onEnter() override;
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
@@ -21,7 +22,10 @@ public:
     CREATE_FUNC(HelloWorld);
 private:
     void updateUserLocation(float);
-    Player *_man;
+    bool onContactBegin(cocos2d::PhysicsContact &contact);
+    void onContactSeparate(cocos2d::PhysicsContact &contact);
+    Mario *_mario;
+    cocos2d::TMXTiledMap *_map;
     JoyStick *_js;
 };
 
